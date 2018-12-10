@@ -1,12 +1,22 @@
 package com.openalpr.jni;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.openalpr.jni.json.JSONException;
 
-public class Alpr {
+public class Alpr {	
+	private static final Logger _logger = Logger.getLogger("com.openalpr.jni.Alpr");
+
     static {
-        // Load the OpenALPR library at runtime
-        // openalprjni.dll (Windows) or libopenalprjni.so (Linux/Mac)
-        System.loadLibrary("openalprjni");
+    	// Load the OpenALPR library at runtime
+		// openalprjni.dll (Windows) or libopenalprjni.so (Linux/Mac)
+    	try {
+    		System.loadLibrary("openalprjni");
+    	}
+    	catch (Exception e) {
+    		_logger.log(Level.WARNING, "Could not load OpenALPR library.");
+    	}
     }
 
     private native void initialize(String country, String configFile, String runtimeDir);
