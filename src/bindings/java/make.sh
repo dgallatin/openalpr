@@ -19,4 +19,4 @@ javah -classpath src com.openalpr.jni.Alpr
 g++ -Wall -L${OPENALPR_LIB_DIR} -I${JAVA_PATH}/include/ -I${OPENALPR_INCLUDE_DIR} -shared -fPIC -o libopenalprjni.so openalprjni.cpp -lopenalpr 
 
 # Test
-java -classpath src Main
+#java -classpath src Main

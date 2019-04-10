@@ -18,41 +18,37 @@ public class Alpr {
     		_logger.log(Level.WARNING, "Could not load OpenALPR library.");
     	}
     }
+    
+    private long _alprPtr;
 
-    private native void initialize(String country, String configFile, String runtimeDir);
-    private native void dispose();
+    private native long initialize(String country, String configFile, String runtimeDir);
+    private native void dispose(long alprPtr);
 
-    private native boolean is_loaded();
-    private native String native_recognize(String imageFile);
-    private native String native_recognize(byte[] imageBytes);
-    private native String native_recognize(long imageData, int bytesPerPixel, int imgWidth, int imgHeight);
+    private native String native_recognize(long alprPtr, String imageFile);
+    private native String native_recognize(long alprPtr, byte[] imageBytes);
+    private native String native_recognize(long alprPtr, long imageData, int bytesPerPixel, int imgWidth, int imgHeight);
 
-    private native void set_default_region(String region);
-    private native void detect_region(boolean detectRegion);
-    private native void set_top_n(int topN);
-    private native String get_version();
+    private native void set_default_region(long alprPtr, String region);
+    private native void detect_region(long alprPtr, boolean detectRegion);
+    private native void set_top_n(long alprPtr, int topN);
+    private native String get_version(long alprPtr);
 
 
 
     public Alpr(String country, String configFile, String runtimeDir)
     {
-        initialize(country, configFile, runtimeDir);
+        _alprPtr = initialize(country, configFile, runtimeDir);
     }
 
     public void unload()
     {
-        dispose();
-    }
-
-    public boolean isLoaded()
-    {
-        return is_loaded();
+        dispose(_alprPtr);
     }
 
     public AlprResults recognize(String imageFile) throws AlprException
     {
         try {
-            String json = native_recognize(imageFile);
+            String json = native_recognize(_alprPtr, imageFile);
             return new AlprResults(json);
         } catch (JSONException e)
         {
@@ -64,7 +60,7 @@ public class Alpr {
     public AlprResults recognize(byte[] imageBytes) throws AlprException
     {
         try {
-            String json = native_recognize(imageBytes);
+            String json = native_recognize(_alprPtr, imageBytes);
             return new AlprResults(json);
         } catch (JSONException e)
         {
@@ -76,7 +72,7 @@ public class Alpr {
     public AlprResults recognize(long imageData, int bytesPerPixel, int imgWidth, int imgHeight) throws AlprException
     {
         try {
-            String json = native_recognize(imageData, bytesPerPixel, imgWidth, imgHeight);
+            String json = native_recognize(_alprPtr, imageData, bytesPerPixel, imgWidth, imgHeight);
             return new AlprResults(json);
         } catch (JSONException e)
         {
@@ -87,21 +83,21 @@ public class Alpr {
 
     public void setTopN(int topN)
     {
-        set_top_n(topN);
+        set_top_n(_alprPtr, topN);
     }
 
     public void setDefaultRegion(String region)
     {
-        set_default_region(region);
+        set_default_region(_alprPtr, region);
     }
 
     public void setDetectRegion(boolean detectRegion)
     {
-        detect_region(detectRegion);
+        detect_region(_alprPtr, detectRegion);
     }
 
     public String getVersion()
     {
-        return get_version();
+        return get_version(_alprPtr);
     }
 }

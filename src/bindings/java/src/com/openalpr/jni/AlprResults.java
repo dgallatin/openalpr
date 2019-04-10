@@ -17,7 +17,7 @@ public class AlprResults {
 
     private List<AlprRegionOfInterest> regionsOfInterest;
 
-    AlprResults(String json) throws JSONException
+    public AlprResults(String json) throws JSONException
     {
         JSONObject jobj = new JSONObject(json);
 

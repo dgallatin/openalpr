@@ -49,5 +49,9 @@ Release/
 # JetBrains IDEA / PyCharm
 .idea/
 
+# Eclipse
+*.project*
+*.classpath*
 
 cmake_install.cmake
+/bin/

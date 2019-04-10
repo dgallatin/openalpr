@@ -10,82 +10,74 @@ extern "C" {
 /*
  * Class:     com_openalpr_jni_Alpr
  * Method:    initialize
- * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+ * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)J
  */
-JNIEXPORT void JNICALL Java_com_openalpr_jni_Alpr_initialize
+JNIEXPORT jlong JNICALL Java_com_openalpr_jni_Alpr_initialize
   (JNIEnv *, jobject, jstring, jstring, jstring);
 
 /*
  * Class:     com_openalpr_jni_Alpr
  * Method:    dispose
- * Signature: ()V
+ * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_openalpr_jni_Alpr_dispose
-  (JNIEnv *, jobject);
-
-/*
- * Class:     com_openalpr_jni_Alpr
- * Method:    is_loaded
- * Signature: ()Z
- */
-JNIEXPORT jboolean JNICALL Java_com_openalpr_jni_Alpr_is_1loaded
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_openalpr_jni_Alpr
  * Method:    native_recognize
- * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ * Signature: (JLjava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_openalpr_jni_Alpr_native_1recognize__Ljava_lang_String_2
-  (JNIEnv *, jobject, jstring);
+JNIEXPORT jstring JNICALL Java_com_openalpr_jni_Alpr_native_1recognize__JLjava_lang_String_2
+  (JNIEnv *, jobject, jlong, jstring);
 
 /*
  * Class:     com_openalpr_jni_Alpr
  * Method:    native_recognize
- * Signature: ([B)Ljava/lang/String;
+ * Signature: (J[B)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_openalpr_jni_Alpr_native_1recognize___3B
-  (JNIEnv *, jobject, jbyteArray);
+JNIEXPORT jstring JNICALL Java_com_openalpr_jni_Alpr_native_1recognize__J_3B
+  (JNIEnv *, jobject, jlong, jbyteArray);
 
 /*
  * Class:     com_openalpr_jni_Alpr
  * Method:    native_recognize
- * Signature: (JIII)Ljava/lang/String;
+ * Signature: (JJIII)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_openalpr_jni_Alpr_native_1recognize__JIII
-  (JNIEnv *, jobject, jlong, jint, jint, jint);
+JNIEXPORT jstring JNICALL Java_com_openalpr_jni_Alpr_native_1recognize__JJIII
+  (JNIEnv *, jobject, jlong, jlong, jint, jint, jint);
 
 /*
  * Class:     com_openalpr_jni_Alpr
  * Method:    set_default_region
- * Signature: (Ljava/lang/String;)V
+ * Signature: (JLjava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_com_openalpr_jni_Alpr_set_1default_1region
-  (JNIEnv *, jobject, jstring);
+  (JNIEnv *, jobject, jlong, jstring);
 
 /*
  * Class:     com_openalpr_jni_Alpr
  * Method:    detect_region
- * Signature: (Z)V
+ * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_openalpr_jni_Alpr_detect_1region
-  (JNIEnv *, jobject, jboolean);
+  (JNIEnv *, jobject, jlong, jboolean);
 
 /*
  * Class:     com_openalpr_jni_Alpr
  * Method:    set_top_n
- * Signature: (I)V
+ * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_openalpr_jni_Alpr_set_1top_1n
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     com_openalpr_jni_Alpr
  * Method:    get_version
- * Signature: ()Ljava/lang/String;
+ * Signature: (J)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_com_openalpr_jni_Alpr_get_1version
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jlong);
 
 #ifdef __cplusplus
 }
